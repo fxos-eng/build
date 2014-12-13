@@ -6,7 +6,8 @@ gulp.task('lint', function () {
 	//  lint error, return the stream and pipe to failOnError last.
 	return gulp.src(['./../../app/js/**/*.js'])
 		.pipe(jshint())
-		.pipe(jshint.reporter('default'));
+		.pipe(jshint.reporter('default'))
+		.pipe(jshint.reporter('fail'));
 });
 
 /**
@@ -14,7 +15,7 @@ gulp.task('lint', function () {
  */
 gulp.task('ci', function () {
 	// Copies files
-	return gulp.src(['./.travis.yml', './.jshintrc'])
+	return gulp.src(['./.jshintrc'])
 		.pipe(gulp.dest('./../..'));
 });
 
