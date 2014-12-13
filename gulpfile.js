@@ -1,20 +1,20 @@
 var gulp = require('gulp');
-var eslint = require('gulp-eslint');
+var jshint = require('gulp-jshint');
 
 gulp.task('lint', function () {
 	// Note: To have the process exit with an error code (1) on
 	//  lint error, return the stream and pipe to failOnError last.
-	return gulp.src(['./../../app/**/*.js'])
-		.pipe(eslint())
-		.pipe(eslint.format())
-		.pipe(eslint.failOnError());
+	return gulp.src(['./../../app/js/**/*.js'])
+		.pipe(jshint())
+		.pipe(jshint.reporter('default'));
 });
 
 /**
- * Moves the travis.yml file into place for travis testing.
+ * Moves files into place for travis or local testing.
  */
-gulp.task('travis', function () {
-	return gulp.src('./.travis.yml')
+gulp.task('ci', function () {
+	// Copies files
+	return gulp.src(['./.travis.yml', './.jshintrc'])
 		.pipe(gulp.dest('./../..'));
 });
 
