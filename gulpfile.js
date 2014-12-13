@@ -15,7 +15,7 @@ gulp.task('lint', function () {
  */
 gulp.task('travis', function () {
 	return gulp.src('./.travis.yml')
-		.pipe(gulp.dest('./..'));
+		.pipe(gulp.dest('./../..'));
 });
 
 gulp.task('default', ['lint'], function () {
