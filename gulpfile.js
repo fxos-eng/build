@@ -1,3 +1,4 @@
+var concat = require('gulp-concat');
 var gulp = require('gulp');
 var to5 = require('gulp-6to5');
 var jshint = require('gulp-jshint');
@@ -31,7 +32,10 @@ gulp.task('to5', function () {
 	}
 
 	return gulp.src(files)
-		.pipe(to5())
+		.pipe(to5({
+			modules: 'amd'
+		}))
+		.pipe(concat('all.js'))
 		.pipe(gulp.dest('./../../app/dist'));
 });
 
