@@ -43,7 +43,6 @@ gulp.task('to5', function () {
 		.pipe(to5({
 			modules: 'amd'
 		}))
-		.pipe(concat('all.js'))
 		.pipe(gulp.dest('./../../app/dist'));
 });
 
