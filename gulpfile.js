@@ -21,7 +21,16 @@ gulp.task('ci', function () {
 });
 
 gulp.task('to5', function () {
-	return gulp.src(['./../../app/js/**/*.js'])
+	var files = ['./../../app/js/**/*.js'];
+
+	// Now add any files from the --component-modules argument.
+	var args   = require('yargs').argv;
+	var external = args.componentModules.split(',');
+	for (var i = 0; i < external.length; i++) {
+		files.push('./../../app/components/' + external[i]);
+	}
+
+	return gulp.src(files)
 		.pipe(to5())
 		.pipe(gulp.dest('./../../app/dist'));
 });
