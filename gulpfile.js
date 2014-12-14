@@ -21,6 +21,12 @@ gulp.task('ci', function () {
 		.pipe(gulp.dest('./../..'));
 });
 
+gulp.task('loader-polyfill', function () {
+	return gulp.src(['./loader_polyfill/*.js'])
+		.pipe(concat('initapp.js'))
+		.pipe(gulp.dest('./../../app/dist'));
+});
+
 gulp.task('to5', function () {
 	var files = ['./../../app/js/**/*.js'];
 
@@ -41,6 +47,6 @@ gulp.task('to5', function () {
 		.pipe(gulp.dest('./../../app/dist'));
 });
 
-gulp.task('default', ['lint', 'to5'], function () {
-	// This will only run if the lint task is successful...
+gulp.task('default', ['lint', 'loader-polyfill', 'to5'], function () {
+	console.log('all done.');
 });
