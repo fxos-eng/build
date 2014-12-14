@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var to5 = require('gulp-6to5');
 var jshint = require('gulp-jshint');
 
 gulp.task('lint', function () {
@@ -19,6 +20,12 @@ gulp.task('ci', function () {
 		.pipe(gulp.dest('./../..'));
 });
 
-gulp.task('default', ['lint'], function () {
+gulp.task('to5', function () {
+	return gulp.src(['./../../app/js/**/*.js'])
+		.pipe(to5())
+		.pipe(gulp.dest('./../../app/dist'));
+});
+
+gulp.task('default', ['lint', 'to5'], function () {
 	// This will only run if the lint task is successful...
 });
