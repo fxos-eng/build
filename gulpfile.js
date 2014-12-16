@@ -50,11 +50,8 @@ gulp.task('to5', function () {
 gulp.task('zip', function () {
 	var appRoot = './../../app/';
 	return gulp.src([
-			appRoot + '**.html',
-			appRoot + 'manifest.webapp',
-			appRoot + 'dist/**',
-			appRoot + 'icons/**',
-			appRoot + 'css/**'
+			appRoot + '**',			// all app files
+			'!' + appRoot + 'js/**'	// not js/ folder as we build that into dist/
 		])
 		.pipe(zip('app.zip'))
 		.pipe(gulp.dest('./../..'));
