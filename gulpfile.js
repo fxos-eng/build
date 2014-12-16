@@ -57,7 +57,7 @@ gulp.task('zip', function () {
 		.pipe(gulp.dest('./../..'));
 });
 
-gulp.task('default', ['lint', 'loader-polyfill', 'to5'], function () {
+gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 	var appRoot = './../../app/';
 	gulp.watch([
 		appRoot + 'js/**/*.js'
