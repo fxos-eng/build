@@ -67,7 +67,7 @@ gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 	var appRoot = './../../app/';
 	gulp.watch([
 		appRoot + 'js/**/*.js'
-	], ['loader-polyfill', 'to5', 'zip']);
+	], ['loader-polyfill', 'to5', 'zip', 'lint']);
 
 	// TODO: Live-reload or push to a device.
 
