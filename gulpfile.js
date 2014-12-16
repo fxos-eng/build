@@ -2,6 +2,7 @@ var concat = require('gulp-concat');
 var gulp = require('gulp');
 var to5 = require('gulp-6to5');
 var jshint = require('gulp-jshint');
+var zip = require('gulp-zip');
 
 gulp.task('lint', function () {
 	// Note: To have the process exit with an error code (1) on
@@ -46,11 +47,24 @@ gulp.task('to5', function () {
 		.pipe(gulp.dest('./../../app/dist'));
 });
 
+gulp.task('zip', function () {
+	var appRoot = './../../app/';
+	return gulp.src([
+			appRoot + '**.html',
+			appRoot + 'manifest.webapp',
+			appRoot + 'dist/**',
+			appRoot + 'icons/**',
+			appRoot + 'css/**'
+		])
+		.pipe(zip('app.zip'))
+		.pipe(gulp.dest('./../..'));
+});
+
 gulp.task('default', ['lint', 'loader-polyfill', 'to5'], function () {
 	var appRoot = './../../app/';
 	gulp.watch([
 		appRoot + 'js/**/*.js'
-	], ['loader-polyfill', 'to5']);
+	], ['loader-polyfill', 'to5', 'zip']);
 
 	// TODO: Live-reload or push to a device.
 
