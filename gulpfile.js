@@ -40,11 +40,18 @@ gulp.task('to5', function () {
 		}
 	}
 
-	return gulp.src(files)
-		.pipe(to5({
-			modules: 'amd'
-		}))
-		.pipe(gulp.dest('./../../app/dist'));
+	try {
+		return gulp.src(files)
+			.pipe(to5({
+					modules: 'amd'
+				}).on('error', function(e) {
+					console.log('error running 6to5', e);
+				})
+			)
+			.pipe(gulp.dest('./../../app/dist'));
+	}  catch(e) {
+		console.log('Got error in 6to5', e);
+	}
 });
 
 gulp.task('zip', function () {
