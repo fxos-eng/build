@@ -57,6 +57,12 @@ gulp.task('zip', function () {
 		.pipe(gulp.dest('./../..'));
 });
 
+/**
+ * Runs travis tests
+ */
+
+gulp.task('travis', ['lint', 'loader-polyfill', 'to5'], function () {});
+
 gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 	var appRoot = './../../app/';
 	gulp.watch([
