@@ -31,7 +31,7 @@ gulp.task('to5', function () {
 	var files = ['./../../app/js/**/*.js'];
 
 	// Now add any files from the --component-modules argument.
-	var args   = require('yargs').argv;
+	var args = require('yargs').argv;
 	if (args.componentModules) {
 		var external = args.componentModules.split(',');
 		for (var i = 0; i < external.length; i++) {
@@ -47,5 +47,12 @@ gulp.task('to5', function () {
 });
 
 gulp.task('default', ['lint', 'loader-polyfill', 'to5'], function () {
-	console.log('all done.');
+	var appRoot = './../../app/';
+	gulp.watch([
+		appRoot + 'js/**/*.js'
+	], ['loader-polyfill', 'to5']);
+
+	// TODO: Live-reload or push to a device.
+
+	console.log('Watching for changes.');
 });
