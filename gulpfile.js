@@ -1,3 +1,12 @@
+/**
+ * IMPORTANT: This file is installed into the app directory as part of the
+ * npm install fxos-build process. Please do not try to modify this file
+ * or create additional build steps without checking with the team first.
+ *
+ * For any build system feature requests or bugs, please open
+ * an issue in the fxos-build project: https://github.com/fxos/build/issues
+ */
+
 var gulp = require('gulp');
 
 var buildModules = __dirname + '/node_modules/fxos-build/node_modules/';
@@ -7,6 +16,9 @@ var jshint = require(buildModules + 'gulp-jshint');
 var yargs = require(buildModules + 'yargs')
 var zip = require(buildModules + 'gulp-zip');
 
+/**
+ * Runs JSLint on all javascript files found in the app dir.
+ */
 gulp.task('lint', function () {
 	// Note: To have the process exit with an error code (1) on
 	//  lint error, return the stream and pipe to failOnError last.
@@ -28,12 +40,18 @@ gulp.task('initialize', function () {
 		.pipe(gulp.dest('./'));
 });
 
+/**
+ * Copies necessary files for the 6to5 AMD loader to the app.
+ */
 gulp.task('loader-polyfill', function () {
 	return gulp.src(['./loader_polyfill/*.js'])
 		.pipe(concat('initapp.js'))
 		.pipe(gulp.dest('./app/dist'));
 });
 
+/**
+ * Converts javascript to ES5. This allows us to use harmony classes and modules.
+ */
 gulp.task('to5', function () {
 	var files = ['./app/js/**/*.js'];
 
@@ -60,6 +78,9 @@ gulp.task('to5', function () {
 	}
 });
 
+/**
+ * Packages the application into a zip.
+ */
 gulp.task('zip', function () {
 	var appRoot = './app/';
 	return gulp.src([
@@ -73,9 +94,12 @@ gulp.task('zip', function () {
 /**
  * Runs travis tests
  */
-
 gulp.task('travis', ['lint', 'loader-polyfill', 'to5'], function () {});
 
+/**
+ * The default task when `gulp` is run.
+ * Adds a listener which will re-build on a file save.
+ */
 gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 	var appRoot = './app/';
 	gulp.watch([
