@@ -110,3 +110,17 @@ gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 
 	console.log('Watching for changes.');
 });
+
+/**
+ * Cleans all created files by this gulpfile, and node_modules.
+ */
+gulp.task('clean', function () {
+	var clean = require(buildModules + 'gulp-clean');
+	return gulp.src([
+		'app/dist/',
+		'./.jshintrc',
+		'node_modules/',
+		'gulpfile.js'
+		], {read: false})
+		.pipe(clean());
+});
