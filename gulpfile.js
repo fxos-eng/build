@@ -117,8 +117,9 @@ gulp.task('default', ['lint', 'loader-polyfill', 'to5', 'zip'], function () {
 gulp.task('clean', function () {
 	var clean = require(buildModules + 'gulp-clean');
 	return gulp.src([
+		'.editorconfig',
+		'.jshintrc',
 		'app/dist/',
-		'./.jshintrc',
 		'node_modules/',
 		'gulpfile.js'
 		], {read: false})
