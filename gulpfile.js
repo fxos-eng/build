@@ -44,7 +44,7 @@ gulp.task('initialize', function () {
  * Copies necessary files for the 6to5 AMD loader to the app.
  */
 gulp.task('loader-polyfill', function () {
-	return gulp.src(['./loader_polyfill/*.js'])
+	return gulp.src(['./node_modules/fxos-build/loader_polyfill/*.js'])
 		.pipe(concat('initapp.js'))
 		.pipe(gulp.dest('./app/dist'));
 });
