@@ -29,18 +29,6 @@ gulp.task('lint', function () {
 });
 
 /**
- * Moves files into place for travis or local testing.
- */
-gulp.task('initialize', function () {
-	// Copies files
-	return gulp.src([
-		'./.jshintrc',
-		'gulpfile.js'
-		])
-		.pipe(gulp.dest('./'));
-});
-
-/**
  * Copies necessary files for the 6to5 AMD loader to the app.
  */
 gulp.task('loader-polyfill', function () {
