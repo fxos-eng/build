@@ -1,10 +1,10 @@
 {
   "name": "fxos-build",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "FxOS build scripts and continuous integration support.",
   "main": "index.js",
   "scripts": {
-    "install": "gulp ci"
+    "install": "make copy-files"
   },
   "repository": {
     "type": "git",
