@@ -14,3 +14,7 @@ To use the linters locally, run:
 ```
 gulp lint
 ```
+
+## Versioning
+
+Follow semvar rules for versioning. Apps are recommended to define the fxos-build dependency with the major and minor versions being set, but yet able to take pathes. E.g., ```0.1.x```. 
