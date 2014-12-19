@@ -6,6 +6,7 @@
 	"scripts": {
 		"install": "make copy-files"
 	},
+	"main": "./index.js",
 	"repository": {
 		"type": "git",
 		"url": "git://github.com/fxos/build.git"

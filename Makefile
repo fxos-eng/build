@@ -2,4 +2,4 @@
 copy-files:
 	cp .editorconfig ../../
 	cp .jshintrc ../../
-	cp 	gulpfile.js ../../
+	cp 	app_gulpfile.js ../../gulpfile.js
