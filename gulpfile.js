@@ -102,7 +102,7 @@ gulp.task('travis', ['lint', 'loader-polyfill', 'to5']);
 /**
  * Build the app.
  */
-gulp.task('build', ['lint', 'loader-polyfill', 'copy-app', 'to5', 'zip']);
+gulp.task('build', ['lint', 'loader-polyfill', 'copy-app', 'to5']);
 
 /**
  * Watch for changes on the file system, and rebuild if so.
