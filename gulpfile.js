@@ -41,6 +41,8 @@ gulp.task('app-bower-install', function() {
 	return bower({
 		directory: './app/components',
 		cwd: APP_ROOT
+		}).on('error', function(e) {
+			console.log('error running bower', e);
 		})
 		.pipe(gulp.dest('.'));
 });
