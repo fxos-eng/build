@@ -38,6 +38,11 @@ gulp.task('app-bower-install', function() {
 		return;
 	}
 
+	// Make sure we have bower componenets to install.
+	if (!fs.existsSync(APP_ROOT + 'bower.json')) {
+		return;
+	}
+
 	return bower({
 		directory: './app/components',
 		cwd: APP_ROOT
