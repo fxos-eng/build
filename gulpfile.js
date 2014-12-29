@@ -23,7 +23,7 @@ gulp.task('app-copy', function() {
 	}
 
 	return gulp.src([
-		'./app_files/.editconfig',
+		'./app_files/.editorconfig',
 		'./app_files/.jshintrc',
 		'./app_files/gulpfile.js'
 		])
