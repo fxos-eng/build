@@ -121,6 +121,7 @@ gulp.task('clobber', function(cb) {
  */
 gulp.task('clean', function (cb) {
 	del([
+		'.bowerrc',
 		'.editorconfig',
 		'.jshintrc',
 		'dist/',
