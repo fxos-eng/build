@@ -123,6 +123,7 @@ gulp.task('clean', function (cb) {
 	del([
 		'.bowerrc',
 		'.editorconfig',
+		'.git/hooks/pre-commit',
 		'.jshintrc',
 		'dist/',
 		'app/components',
