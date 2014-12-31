@@ -27,9 +27,7 @@ const DIST_APP_ROOT = './dist/app/';
 gulp.task('lint', function () {
 	// Note: To have the process exit with an error code (1) on
 	//  lint error, return the stream and pipe to failOnError last.
-	return gulp.src([
-		'./app/js/**/*.js',
-		'./app/components/**/*.js'])
+	return gulp.src(['./app/js/**/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'))
 		.pipe(jshint.reporter('fail'));
