@@ -93,7 +93,7 @@ gulp.task('travis', ['lint', 'loader-polyfill', 'to5']);
  * Build the app.
  */
 gulp.task('build', function(cb) {
-	runSequence(['lint', 'clobber'], ['loader-polyfill', 'copy-app'], 'to5', cb);
+	runSequence(['clobber'], ['loader-polyfill', 'copy-app'], ['to5', 'lint'], cb);
 });
 
 /**
