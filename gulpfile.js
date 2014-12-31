@@ -54,9 +54,21 @@ gulp.task('app-bower-install', function() {
 });
 
 /**
+ * Install pre-commit hook for app.
+ */
+gulp.task('app-pre-commit', function() {
+	if (!isAppInstall()) {
+		return;
+	}
+
+	return gulp.src(['./app_files/pre-commit'])
+		.pipe(gulp.dest(APP_ROOT + '.git/hooks/'));
+});
+
+/**
  * Check if we are in app, and if so install app components.
  */
-gulp.task('install', ['app-copy', 'app-bower-install']);
+gulp.task('install', ['app-copy', 'app-bower-install', 'app-pre-commit']);
 
 /**
  * Runs JSLint on all javascript files found in the app dir.
