@@ -100,7 +100,7 @@ gulp.task('build', function(cb) {
  * Watch for changes on the file system, and rebuild if so.
  */
 gulp.task('watch', function() {
-	gulp.watch([APP_ROOT + 'js/**/*.js'], ['build']);
+	gulp.watch([APP_ROOT + '**'], ['build']);
 });
 
 /**
