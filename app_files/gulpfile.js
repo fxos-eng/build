@@ -107,7 +107,9 @@ gulp.task('watch', function() {
  * The default task when `gulp` is run.
  * Adds a listener which will re-build on a file save.
  */
-gulp.task('default', ['build', 'watch']);
+gulp.task('default', function() {
+	runSequence('build', 'watch');
+});
 
 /**
  * Remove the distributable files.

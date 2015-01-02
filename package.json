@@ -1,6 +1,6 @@
 {
 	"name": "fxos-build",
-	"version": "0.3.1",
+	"version": "0.3.2",
 	"description": "FxOS build scripts and continuous integration support.",
 	"main": "index.js",
 	"scripts": {
