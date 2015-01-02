@@ -43,12 +43,12 @@ gulp.task('loader-polyfill', function () {
 });
 
 /**
- * Copy all non-js app source/assets.
+ * Copy all non-js directory app source/assets/components.
  */
 gulp.task('copy-app', function() {
 	return gulp.src([
 		APP_ROOT + '**',
-		'!' + APP_ROOT + '**/*.js' // do not copy js
+		'!' + APP_ROOT + 'js/**/*.js' // do not copy js
 		])
 		.pipe(gulp.dest(DIST_APP_ROOT));
 });
@@ -58,7 +58,7 @@ gulp.task('copy-app', function() {
  */
 gulp.task('to5', function () {
 	var files = [
-		APP_ROOT + '**/*.js',
+		APP_ROOT + 'js/**/*.js',
 		];
 
 	try {
@@ -69,7 +69,7 @@ gulp.task('to5', function () {
 					console.log('error running 6to5', e);
 				})
 			)
-			.pipe(gulp.dest(DIST_APP_ROOT));
+			.pipe(gulp.dest(DIST_APP_ROOT + 'js/'));
 	}  catch(e) {
 		console.log('Got error in 6to5', e);
 	}
