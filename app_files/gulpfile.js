@@ -17,6 +17,8 @@ var zip = require(buildModules + 'gulp-zip');
 var del = require(buildModules + 'del');
 var runSequence = require(buildModules + 'run-sequence');
 var webserver = require(buildModules + 'gulp-webserver');
+var jsx = require(buildModules + 'gulp-jsx');
+
 
 const APP_ROOT = './app/';
 const DIST_ROOT = './dist/';
@@ -53,6 +55,7 @@ gulp.task('copy-app', function() {
   return gulp.src([
     APP_ROOT + '**',
     '!' + APP_ROOT + 'js/**/*.js' // do not copy js
+    , '!' + APP_ROOT + 'views/**/*.js'// not views
     ])
     .pipe(gulp.dest(DIST_APP_ROOT));
 });
@@ -89,15 +92,24 @@ gulp.task('zip', function () {
 });
 
 /**
+ * Handles jsx transformations.
+ */
+gulp.task('jsx', function() {
+  return gulp.src(APP_ROOT + 'views/**/*.js')
+    .pipe(jsx())
+    .pipe(gulp.dest(DIST_APP_ROOT + 'views/'));
+});
+
+/**
  * Runs travis tests
  */
-gulp.task('travis', ['lint', 'loader-polyfill', 'to5']);
+gulp.task('travis', ['lint', 'loader-polyfill', 'jsx']);
 
 /**
  * Build the app.
  */
 gulp.task('build', function(cb) {
-  runSequence(['clobber'], ['loader-polyfill', 'copy-app'], ['to5', 'lint'], cb);
+  runSequence(['clobber'], ['copy-app'], ['jsx', 'lint'], cb);
 });
 
 /**
