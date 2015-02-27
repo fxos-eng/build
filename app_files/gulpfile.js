@@ -110,6 +110,8 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
   gulp.src('dist/app')
     .pipe(webserver({
+      port: process.env.PORT || 8000,
+      host: process.env.HOSTNAME || 'localhost',
       livereload: false,
       directoryListing: false,
       open: false
