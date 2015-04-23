@@ -26,7 +26,8 @@ gulp.task('app-copy', function() {
 		'./app_files/.bowerrc',
 		'./app_files/.editorconfig',
 		'./app_files/.jshintrc',
-		'./app_files/gulpfile.js'
+		'./app_files/gulpfile.js',
+		'./app_files/deploy.sh'
 		])
 		.pipe(gulp.dest(APP_ROOT));
 });
