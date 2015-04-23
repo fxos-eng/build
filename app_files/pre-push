@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ -z $IGNORE ]; then
+  echo "Pushing gh-pages"
+  IGNORE=1 git push -f origin gh-pages
+  echo "Done pushing gh-pages"
+fi

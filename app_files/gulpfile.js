@@ -141,6 +141,8 @@ gulp.task('clean', function (cb) {
     '.bowerrc',
     '.editorconfig',
     '.git/hooks/pre-commit',
+    '.git/hooks/post-commit',
+    '.git/hooks/pre-push',
     '.jshintrc',
     'dist/',
     'app/components',
