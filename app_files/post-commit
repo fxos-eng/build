@@ -7,7 +7,7 @@ current=`git rev-parse -q --verify gh-pages:` \
 && test $current = "`git rev-parse -q --verify master:dist/app`" \
 && exit 0
 
-# update the gh-pages ref to a new commit ...    
+# update the gh-pages ref to a new commit ...
 git update-ref refs/heads/gh-pages $(
     # ... which has master:dist/app, parented on gh-pages if that exists yet
     git commit-tree ${current:+-p gh-pages} -m "updating" master:dist/app

@@ -62,9 +62,9 @@ gulp.task('app-pre-commit', function() {
 	}
 
 	return gulp.src([
-		'./app_files/pre-commit',
-		APP_ROOT + 'post-commit',
-		APP_ROOT + 'pre-push'
+		'./app_files/pre-push',
+		'./app_files/post-commit',
+		APP_ROOT + 'pre-commit'
 		])
 		.pipe(gulp.dest(APP_ROOT + '.git/hooks/'));
 });
