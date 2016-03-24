@@ -11,11 +11,11 @@ var gulp = require('gulp');
 
 var buildModules = __dirname + '/node_modules/fxos-build/node_modules/';
 var concat = require(buildModules + 'gulp-concat');
-var to5 = require(buildModules + 'gulp-6to5');
+var babel = require(buildModules + 'gulp-babel');
 var jshint = require(buildModules + 'gulp-jshint');
 var zip = require(buildModules + 'gulp-zip');
 var del = require(buildModules + 'del');
-var runSequence = require(buildModules + 'run-sequence');
+var runSequence = require(buildModules + 'run-sequence').use(gulp);
 var webserver = require(buildModules + 'gulp-webserver');
 
 const APP_ROOT = './app/';
@@ -38,7 +38,7 @@ gulp.task('lint', function() {
 });
 
 /**
- * copies necessary files for the 6to5 amd loader to the app.
+ * copies necessary files for the Babel amd loader to the app.
  */
 gulp.task('loader-polyfill', function() {
   return gulp.src(['./node_modules/fxos-build/app_files/loader_polyfill/*.js'])
@@ -60,22 +60,21 @@ gulp.task('copy-app', function() {
 /**
  * converts javascript to es5. this allows us to use harmony classes and modules.
  */
-gulp.task('to5', function() {
+gulp.task('babel', function() {
   var files = [
     APP_ROOT + 'js/**/*.js'
   ];
 
   try {
     return gulp.src(files)
-      .pipe(to5({
-          modules: 'amd'
-        }).on('error', function(e) {
-          console.log('error running 6to5', e);
+      .pipe(babel()
+        .on('error', function(e) {
+          console.log('error running Babel', e);
         })
       )
       .pipe(gulp.dest(DIST_APP_ROOT + 'js/'));
   } catch (e) {
-    console.log('Got error in 6to5', e);
+    console.log('Got error in Babel', e);
   }
 });
 
@@ -91,13 +90,13 @@ gulp.task('zip', function() {
 /**
  * Runs travis tests
  */
-gulp.task('travis', ['lint', 'loader-polyfill', 'to5']);
+gulp.task('travis', ['lint', 'loader-polyfill', 'babel']);
 
 /**
  * Build the app.
  */
 gulp.task('build', function(cb) {
-  runSequence(['clobber'], ['loader-polyfill', 'copy-app'], ['to5', 'lint'], cb);
+  runSequence(['clobber'], ['loader-polyfill', 'copy-app'], ['babel', 'lint'], cb);
 });
 
 /**
