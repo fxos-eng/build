@@ -4,7 +4,7 @@
  * or create additional build steps without checking with the team first.
  *
  * For any build system feature requests or bugs, please open
- * an issue in the fxos-build project: https://github.com/fxos/build/issues
+ * an issue in the fxos-build project: https://github.com/fxos-eng/build/issues
  */
 
 var gulp = require('gulp');
@@ -25,7 +25,7 @@ const DIST_APP_ROOT = './dist/app/';
 /**
  * runs jslint on all javascript files found in the app dir.
  */
-gulp.task('lint', function () {
+gulp.task('lint', function() {
   // Note: To have the process exit with an error code (1) on
   //  lint error, return the stream and pipe to failOnError last.
   return gulp.src([
@@ -40,7 +40,7 @@ gulp.task('lint', function () {
 /**
  * copies necessary files for the 6to5 amd loader to the app.
  */
-gulp.task('loader-polyfill', function () {
+gulp.task('loader-polyfill', function() {
   return gulp.src(['./node_modules/fxos-build/app_files/loader_polyfill/*.js'])
     .pipe(concat('initapp.js'))
     .pipe(gulp.dest(DIST_APP_ROOT + 'js'));
@@ -51,8 +51,8 @@ gulp.task('loader-polyfill', function () {
  */
 gulp.task('copy-app', function() {
   return gulp.src([
-    APP_ROOT + '**',
-    '!' + APP_ROOT + 'js/**/*.js' // do not copy js
+      APP_ROOT + '**',
+      '!' + APP_ROOT + 'js/**/*.js' // do not copy js
     ])
     .pipe(gulp.dest(DIST_APP_ROOT));
 });
@@ -60,10 +60,10 @@ gulp.task('copy-app', function() {
 /**
  * converts javascript to es5. this allows us to use harmony classes and modules.
  */
-gulp.task('to5', function () {
+gulp.task('to5', function() {
   var files = [
-    APP_ROOT + 'js/**/*.js',
-    ];
+    APP_ROOT + 'js/**/*.js'
+  ];
 
   try {
     return gulp.src(files)
@@ -74,7 +74,7 @@ gulp.task('to5', function () {
         })
       )
       .pipe(gulp.dest(DIST_APP_ROOT + 'js/'));
-  }  catch(e) {
+  } catch (e) {
     console.log('Got error in 6to5', e);
   }
 });
@@ -82,7 +82,7 @@ gulp.task('to5', function () {
 /**
  * Packages the application into a zip.
  */
-gulp.task('zip', function () {
+gulp.task('zip', function() {
   return gulp.src(DIST_APP_ROOT)
     .pipe(zip('app.zip'))
     .pipe(gulp.dest(DIST_ROOT));
@@ -136,7 +136,7 @@ gulp.task('clobber', function(cb) {
 /**
  * Cleans all created files by this gulpfile, and node_modules.
  */
-gulp.task('clean', function (cb) {
+gulp.task('clean', function(cb) {
   del([
     '.bowerrc',
     '.editorconfig',
