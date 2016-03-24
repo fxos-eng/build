@@ -11,59 +11,61 @@ var APP_ROOT = '../../';
  * Are we installing an app modules, or the build repo modules?
  */
 function isAppInstall() {
-	return fs.existsSync(APP_ROOT + 'app/manifest.webapp');
+  return fs.existsSync(APP_ROOT + 'app/manifest.webapp');
 }
 
 /**
  * Copy needed files into app directory.
  */
 gulp.task('app-copy', function() {
-	if (!isAppInstall()) {
-		return;
-	}
+  if (!isAppInstall()) {
+    return;
+  }
 
-	return gulp.src([
-		'./app_files/.bowerrc',
-		'./app_files/.editorconfig',
-		'./app_files/.jshintrc',
-		'./app_files/gulpfile.js',
-		'./app_files/deploy.sh'
-		])
-		.pipe(gulp.dest(APP_ROOT));
+  return gulp.src([
+      './app_files/.babelrc',
+      './app_files/.bowerrc',
+      './app_files/.editorconfig',
+      './app_files/.jshintrc',
+      './app_files/gulpfile.js',
+      './app_files/deploy.sh'
+    ])
+    .pipe(gulp.dest(APP_ROOT));
 });
 
 /**
  * Install bower components into app's path.
  */
 gulp.task('app-bower-install', function() {
-	if (!isAppInstall()) {
-		return;
-	}
+  if (!isAppInstall()) {
+    return;
+  }
 
-	// Make sure we have bower componenets to install.
-	if (!fs.existsSync(APP_ROOT + 'bower.json')) {
-		return;
-	}
+  // Make sure we have bower components to install.
+  if (!fs.existsSync(APP_ROOT + 'bower.json')) {
+    return;
+  }
 
-	return bower({
-		directory: './app/components',
-		cwd: APP_ROOT
-		}).on('error', function(e) {
-			console.log('error running bower', e);
-		})
-		.pipe(gulp.dest('.'));
+  return bower({
+    directory: './app/components',
+    cwd: APP_ROOT
+  })
+    .on('error', function(e) {
+      console.log('error running bower', e);
+    })
+    .pipe(gulp.dest('.'));
 });
 
 /**
  * Install pre-commit hook for app.
  */
 gulp.task('app-pre-commit', function() {
-	if (!isAppInstall()) {
-		return;
-	}
+  if (!isAppInstall()) {
+    return;
+  }
 
-	return gulp.src(['./app_files/pre-commit'])
-		.pipe(gulp.dest(APP_ROOT + '.git/hooks/'));
+  return gulp.src(['./app_files/pre-commit'])
+    .pipe(gulp.dest(APP_ROOT + '.git/hooks/'));
 });
 
 /**
@@ -74,13 +76,13 @@ gulp.task('install', ['app-copy', 'app-bower-install', 'app-pre-commit']);
 /**
  * Runs JSLint on all javascript files found in the app dir.
  */
-gulp.task('lint', function () {
-	// Note: To have the process exit with an error code (1) on
-	//  lint error, return the stream and pipe to failOnError last.
-	return gulp.src(['./app_files/**/*.js', './gulpfile.js'])
-		.pipe(jshint())
-		.pipe(jshint.reporter('default'))
-		.pipe(jshint.reporter('fail'));
+gulp.task('lint', function() {
+  // Note: To have the process exit with an error code (1) on
+  //  lint error, return the stream and pipe to failOnError last.
+  return gulp.src(['./app_files/**/*.js', './gulpfile.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('fail'));
 });
 
 /**
