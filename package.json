@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/fxos/build.git"
+    "url": "git://github.com/fxos-eng/build.git"
   },
   "author": "FxOS Developers <dev-gaia@lists.mozilla.com>",
   "license": "MPL",
   "bugs": {
-    "url": "https://github.com/fxos/build/issues"
+    "url": "https://github.com/fxos-eng/build/issues"
   },
   "engines": {
     "node": "0.11.14"
